@@ -1,7 +1,6 @@
 # Convolutional Autoencoder in PyTorch Lightning
 
-<img src="docs/architecture.png"
-     style="width: 80%; text-align: center;" />
+<img src="docs/architecture.png"/>
 
 
 This project presents a deep convolutional autoencoder which I developed in collaboration with a fellow student [Li Nguyen](https://github.com/nichtwegzudenken) for an assignment in the Machine Learning Applications for Computer Graphics class at Tel Aviv University. To find out more about the assignment results please read the [report](docs/report.pdf).
@@ -13,7 +12,7 @@ Install the required dependencies. Consider creating a virtual environment first
 pip install -r requirements.txt
 ```
 
-Prepare your data. In our case we used the celebrity dataset [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) from the paper [Deep Learning Face Attributes in the Wild](https://liuziwei7.github.io/projects/FaceAttributes.html) presented at ICCV 2015. 
+Save your data in a directory of your choice. We used the celebrity dataset [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) from the paper [Deep Learning Face Attributes in the Wild](https://liuziwei7.github.io/projects/FaceAttributes.html) presented at ICCV 2015. If you would like to use your own data, the only thing you need to adjust are the training, validation and test splits in the `prepare_data()` method.
 
 The `autoencoder.py` script supports the following command line arguments.  
 ```bash
@@ -52,9 +51,15 @@ To train the autoencoder simply pass in the path where your data is located and 
 python autoencoder.py --data_root data --gpus 2
 ```
 
+Fire up Tensorboard to visualize the training progress of your network in your browser under `http://localhost:6006/`.
+
+```bash
+tensorboard --logdir logs
+```
+
 ## Results Summary
 
-The input images with shape 3 * 128 * 128 are encoded into a 1D bottleneck of size 256. This corresponds to a compression of 95.31%. We decode the images such that the reconstruced images match the original images as closely as possible. We use a MSE reconstruction loss for this. We tried several different architectures and hyperparameters. The following is our best performing model and below we shows some visual results (original images in top row, reconstructed images in bottom row). 
+The input images with shape 3 * 128 * 128 are encoded into a 1D bottleneck of size 256. This corresponds to a compression of 95.31%. We decode the images such that the reconstructed images match the original images as closely as possible. We use a MSE reconstruction loss for this. We tried several different architectures and hyperparameters. The following is our best performing model and below we show some visual results (original images in top row, reconstructed images in bottom row).
 
 ```bash
 ----------------------------------------------------------------
@@ -109,4 +114,3 @@ Estimated Total Size (MB): 141.25
 
 <img src="docs/bs64_nf64_small.png"
      style="width: 80%; text-align: center;" />
-
